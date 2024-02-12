@@ -1,6 +1,7 @@
 [
     {
         "nombre":"Juan",
+        "sku":"123",
         "type":"simple",
         "regular_price":"100",
         "description":"Producto de prueba",

@@ -9,6 +9,7 @@ interface Modelo{
 
 class Producto implements Modelo{
     private $nombre;
+    private $sku;
     private $type;
     private $regular_price;
     private $description;
@@ -16,8 +17,9 @@ class Producto implements Modelo{
     private $categories;
     private $images;
 
-    public function __construct($nombre, $type, $regular_price, $description, $short_description, $categories, $images){
+    public function __construct($nombre, $sku, $type, $regular_price, $description, $short_description, $categories, $images){
         $this->nombre = $nombre;
+        $this->sku = $sku;
         $this->type = $type;
         $this->regular_price = $regular_price;
         $this->description = $description;
@@ -37,7 +39,7 @@ class Producto implements Modelo{
         $productos = json_decode(file_get_contents($json), true);
         //var_dump($productos);
         $productos = array_map(function ($producto) {
-            return new Producto($producto['nombre'], $producto['type'], $producto['regular_price'], $producto['description'], $producto['short_description'], $producto['categories'], $producto['images']);
+            return new Producto($producto['nombre'], $producto["sku"],$producto['type'], $producto['regular_price'], $producto['description'], $producto['short_description'], $producto['categories'], $producto['images']);
         }, $productos);
         //var_dump($productos);
         return $productos;
@@ -54,6 +56,7 @@ class Producto implements Modelo{
         $woocommerce = Conexion::getConexion();
         $data = [
             'name' => $producto->nombre,
+            "sku" => $producto->sku,
             'type' => $producto->type,
             'regular_price' => $producto->regular_price,
             'description' => $producto->description,
