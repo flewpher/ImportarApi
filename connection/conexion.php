@@ -8,10 +8,7 @@ $dotenv->load();
 
 Class Conexion{
   private static $instance = null;
-
-  public static function getConexion(){
-
-    
+  public static function getConexion(){   
     if (self::$instance == null) {
       try {
         self::$instance = new Client(
