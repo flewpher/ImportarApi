@@ -1,0 +1,23 @@
+[
+    {
+        "nombre":"Juan",
+        "type":"simple",
+        "regular_price":"100",
+        "description":"Producto de prueba",
+        "short_description":"prueba",
+        "categories":[
+            {
+                "id":19
+            }
+
+        ],
+        "images":[
+            {
+                "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+                "position":0
+            }
+
+        ]
+
+    }
+]
