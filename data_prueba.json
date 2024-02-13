@@ -1,24 +1,39 @@
 [
-    {
-        "nombre":"Juan",
-        "sku":"123",
-        "type":"simple",
-        "regular_price":"100",
-        "description":"Producto de prueba",
-        "short_description":"prueba",
-        "categories":[
-            {
-                "id":19
-            }
-
-        ],
-        "images":[
-            {
-                "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-                "position":0
-            }
-
-        ]
-
+  {
+    "nombre": "Juan",
+    "sku": "123",
+    "type": "simple",
+    "regular_price": "100",
+    "description": "Producto de prueba",
+    "short_description": "prueba",
+    "categories": [
+      {
+        "id": 19
+      }
+    ],
+    "images": [
+      {
+        "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+        "position": 0
+      }
+    ]
+  },{
+    "nombre": "Paco",
+    "sku": "321",
+    "type": "simple",
+    "regular_price": "100",
+    "description": "Producto de prueba",
+    "short_description": "prueba",
+    "categories": [
+      {
+        "id": 19
+      }
+    ],
+    "images": [
+      {
+        "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+        "position": 0
+      }
+    ]
     }
 ]

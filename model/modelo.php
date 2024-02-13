@@ -54,6 +54,7 @@ class Producto implements Modelo{
     public static function publicar($producto)
     {
         $woocommerce = Conexion::getConexion();
+
         $data = [
             'name' => $producto->nombre,
             "sku" => $producto->sku,
