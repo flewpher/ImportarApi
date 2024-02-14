@@ -2,12 +2,14 @@
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../connection/conexion.php';
 
-interface Modelo{
-    public static function __construct_desde_json($json);
+interface Modelo
+{
+    public static function __construct_desde_json(string $json);
     public static function publicar($producto);
 }
 
-class Producto implements Modelo{
+class Producto implements Modelo
+{
     private $nombre;
     private $sku;
     private $type;
@@ -17,7 +19,8 @@ class Producto implements Modelo{
     private $categories;
     private $images;
 
-    public function __construct($nombre, $sku, $type, $regular_price, $description, $short_description, $categories, $images){
+    public function __construct($nombre, $sku, $type, $regular_price, $description, $short_description, $categories, $images)
+    {
         $this->nombre = $nombre;
         $this->sku = $sku;
         $this->type = $type;
@@ -34,26 +37,23 @@ class Producto implements Modelo{
      * @param string $json The path to the JSON file.
      * @return array An array of Producto objects.
      */
-    public static function __construct_desde_json($json)
+    public static function __construct_desde_json(string $json): array|bool
     {
         $productos = json_decode(file_get_contents($json), true);
         //var_dump($productos);
         $productos = array_map(function ($producto) {
-            return new Producto($producto['nombre'], $producto["sku"],$producto['type'], $producto['regular_price'], $producto['description'], $producto['short_description'], $producto['categories'], $producto['images']);
+            return new Producto($producto['nombre'], $producto["sku"], $producto['type'], $producto['regular_price'], $producto['description'], $producto['short_description'], $producto['categories'], $producto['images']);
         }, $productos);
         //var_dump($productos);
         return $productos;
     }
 
-    /**
-     * Publishes a product to the WooCommerce API.
-     *
-     * @param object $producto The product object to be published.
-     * @throws \Throwable if an error occurs while publishing the product.
-     */
+
     public static function publicar($producto)
     {
         $woocommerce = Conexion::getConexion();
+        $comprobar = false;
+
         $data = [
             'name' => $producto->nombre,
             "sku" => $producto->sku,
@@ -66,10 +66,20 @@ class Producto implements Modelo{
         ];
 
         try {
-            $woocommerce->post("products",$data);
+            $comprobar = $woocommerce->get('products', array("sku" => $producto->sku));
+            if (!empty($comprobar)) {
+                $comprobar = true;
+            }
         } catch (\Throwable $th) {
             throw $th;
         }
-    }
 
+        if (!$comprobar) {
+            try {
+                $woocommerce->post('products', $data);
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        }
+    }
 }
