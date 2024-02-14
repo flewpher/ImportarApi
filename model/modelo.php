@@ -31,11 +31,12 @@ class Producto implements Modelo
         $this->images = $images;
     }
 
+
     /**
-     * Creates an array of Producto objects from a JSON file.
+     * Crea un array de objetos Producto a partir de un archivo JSON.
      *
-     * @param string $json The path to the JSON file.
-     * @return array An array of Producto objects.
+     * @param string $json La ruta del archivo JSON.
+     * @return array|bool El array de objetos Producto si se pudo decodificar el JSON correctamente, o false en caso contrario.
      */
     public static function __construct_desde_json(string $json): array|bool
     {
@@ -67,6 +68,7 @@ class Producto implements Modelo
 
         try {
             $comprobar = $woocommerce->get('products', array("sku" => $producto->sku));
+            //var_dump($comprobar);
             if (!empty($comprobar)) {
                 $comprobar = true;
             }
